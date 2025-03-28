@@ -1,6 +1,7 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
 const { time } = require('console');
+const {acessarUrl, validarLoginComSucesso, validarMsgBoasVindas} = require('./pageObjects/pageLogin')
 
 test('has title', async ({ page }) => {
   await page.goto('https://playwright.dev/');
@@ -29,4 +30,11 @@ test('teste de login com sucesso @testes', async ({ page }) => {
   await expect(page.getByText('Olá, teste@gmail.com')).toBeVisible();
   await page.getByRole('button', { name: 'OK' }).click();
   //await expect(page.getByText('Olá, Maxfalhas')).toBeVisible();
+})
+
+//utilizando pageObjects
+test('teste de login com sucesso com pageObjects @testes', async ({ page }) => {
+  await acessarUrl(page);
+  await validarLoginComSucesso(page);
+  await validarMsgBoasVindas(page);
 })
